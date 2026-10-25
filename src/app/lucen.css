@@ -1,0 +1,188 @@
+:root {
+  color-scheme: light;
+  --background: oklch(97% 0.012 85);
+  --surface: oklch(93% 0.02 85);
+  --foreground: oklch(27% 0.012 110);
+  --muted: oklch(46% 0.02 100);
+  --olive: oklch(40% 0.055 115);
+  --warning: oklch(40% 0.065 65);
+  --line: color-mix(in oklch, var(--foreground) 12%, var(--background));
+  --text-balance: clamp(2.75rem, 2.5rem + 1vw, 3rem);
+  --text-heading: clamp(1.625rem, 1.5rem + 0.5vw, 1.75rem);
+  overflow-wrap: break-word;
+}
+
+body {
+  min-block-size: 100dvh;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+h1, h2 { text-wrap: balance; }
+p { text-wrap: pretty; }
+button, a, summary { touch-action: manipulation; }
+:focus-visible { outline: 3px solid var(--olive); outline-offset: 3px; }
+html:has(dialog:modal) { overflow: hidden; }
+
+/* A content frame, with the same single-column app at every viewport size. */
+.lucen-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  inline-size: min(100%, 24.375rem);
+  block-size: min(100dvh, 56rem);
+  margin-inline: auto;
+  background: var(--background);
+  box-shadow: 0 0 0 1px var(--line);
+  position: relative;
+}
+.lucen-shell > * { min-inline-size: 0; }
+.lucen-shell h1, .lucen-shell h2:not(.lucen-eyebrow), .lucen-dialog h2 {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+.lucen-shell h1 { font-size: var(--text-heading); }
+.lucen-shell h2:not(.lucen-eyebrow) { font-size: 1rem; }
+.lucen-dialog h2 { font-size: 1.5rem; }
+.lucen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+  padding-block: calc(0.5rem + env(safe-area-inset-top, 0px)) 0.5rem;
+}
+.lucen-wordmark, .lucen-brand { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.065em; }
+.lucen-brand { display: inline-flex; align-items: center; min-block-size: 2.75rem; }
+.lucen-sampleBadge {
+  padding-block: 0.25rem;
+  padding-inline: 0.625rem;
+  border: 1px solid var(--line);
+  border-radius: 100vmax;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.lucen-content {
+  min-block-size: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overscroll-behavior-block: contain;
+  scroll-padding-block: 1rem;
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+  padding-block-end: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.lucen-content > * { flex: none; min-inline-size: 0; }
+.lucen-content:focus-visible { outline-offset: -3px; }
+.lucen-content section { scroll-margin-block: 1rem; }
+.lucen-headingRow { display: grid; gap: 0.375rem; padding-block-start: 0.25rem; }
+.lucen-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.lucen-note, .lucen-sampleNotice, .lucen-totals dt { color: var(--muted); font-size: 0.75rem; line-height: 1.5; }
+.lucen-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-block-size: 3rem;
+  padding-block: 0.75rem;
+  padding-inline: 1.25rem;
+  border-radius: 100vmax;
+  background: var(--olive);
+  color: var(--background);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+.lucen-primary svg { inline-size: 1.2em; block-size: 1.2em; flex: none; }
+.lucen-primary:active { background: color-mix(in oklch, var(--olive), black 25%); }
+.lucen-brand:active, .lucen-bottomNav a:active { background: var(--surface); }
+.lucen-balancePanel { display: grid; justify-items: center; gap: 0.25rem; padding-block-start: 0.75rem; text-align: center; }
+.lucen-period { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--foreground); border-radius: 100vmax; padding-block: 0.25rem; padding-inline: 0.75rem; font-size: 0.75rem; line-height: 1.5; }
+.lucen-balancePanel > .lucen-period { margin-block-end: 1rem; }
+.lucen-shell h2.lucen-balanceLabel { font-size: 0.8125rem; font-weight: 400; color: var(--muted); letter-spacing: normal; }
+.lucen-balance { font-size: var(--text-balance); font-weight: 500; letter-spacing: -0.06em; line-height: 1.25; font-variant-numeric: tabular-nums; }
+.lucen-chart { inline-size: 100%; margin-block: 0.75rem 0.5rem; }
+.lucen-chart svg { inline-size: 100%; block-size: auto; overflow: visible; fill: none; stroke: var(--foreground); stroke-width: 2.5; stroke-linecap: round; }
+.lucen-chartProjection { stroke: var(--olive); stroke-dasharray: 4 6; }
+.lucen-chart circle { fill: var(--background); }
+.lucen-chart svg text { fill: var(--muted); stroke: none; font-size: 12px; font-variant-numeric: tabular-nums; }
+.lucen-chart svg .lucen-chartToday { fill: var(--foreground); font-weight: 600; }
+.lucen-chart figcaption { color: var(--muted); font-size: 0.75rem; margin-block-start: 0.5rem; }
+.lucen-totals { inline-size: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; padding-block-start: 1rem; border-block-start: 1px solid var(--line); }
+.lucen-totals dd { font-size: 1rem; font-variant-numeric: tabular-nums; }
+.lucen-income { color: var(--olive); }
+.lucen-panel { display: grid; gap: 0.625rem; }
+.lucen-sectionHeading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+.lucen-paymentWarning { display: grid; gap: 0.5rem; }
+.lucen-paymentWarning strong { font-weight: 500; }
+.lucen-dueBadge { display: inline-block; color: var(--warning); border: 1px solid currentColor; border-radius: 100vmax; padding-block: 0.125rem; padding-inline: 0.5rem; font-size: 0.75rem; }
+.lucen-details summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-block-size: 2.75rem;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: var(--olive);
+  list-style: none;
+}
+.lucen-details summary::-webkit-details-marker { display: none; }
+.lucen-details summary::after { content: "+"; font-size: 1rem; margin-inline-start: auto; }
+.lucen-details[open] summary::after { content: "−"; }
+.lucen-details summary .lucen-amount { margin-inline-start: auto; }
+.lucen-details summary:active { background: var(--surface); }
+.lucen-details > .lucen-note { padding-block-start: 0.5rem; }
+.lucen-list { list-style: none; padding: 0; margin: 0; }
+.lucen-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.75rem; align-items: center; padding-block: 0.875rem; border-block-end: 1px solid var(--line); }
+.lucen-list .lucen-transaction { grid-template-columns: 2rem minmax(0, 1fr) auto; gap: 0.625rem; }
+.lucen-transactionIcon { display: grid; place-items: center; inline-size: 2rem; block-size: 2rem; background: var(--surface); border-radius: 50%; }
+.lucen-transactionIcon svg { inline-size: 1.25em; block-size: 1.25em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lucen-amount { text-align: end; font-variant-numeric: tabular-nums; font-weight: 500; white-space: nowrap; }
+.lucen-forecast { background: color-mix(in oklch, var(--surface) 60%, var(--background)); padding: 1rem; border-radius: 1rem; gap: 0.25rem; }
+.lucen-sectionAmount { font-size: 2rem; font-variant-numeric: tabular-nums; letter-spacing: -0.05em; }
+.lucen-forecastRows { display: grid; gap: 0.625rem; font-size: 0.8125rem; padding-block: 0.5rem; }
+.lucen-forecastRows > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.75rem; }
+.lucen-forecastRows dd { font-variant-numeric: tabular-nums; text-align: end; }
+.lucen-forecastRows > div:last-child { border-block-start: 1px solid var(--line); padding-block-start: 0.625rem; font-weight: 600; }
+.lucen-dock {
+  background: var(--background);
+  border-block-start: 1px solid var(--line);
+  padding-block: 0.5rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  padding-inline: max(0.75rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+}
+.lucen-bottomNav { display: grid; grid-template-columns: 1fr 1fr 1.4fr 1fr 1fr; gap: 0.125rem; align-items: center; }
+.lucen-bottomNav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.375rem; min-block-size: 3.5rem; padding-block: 0.25rem; border-radius: 0.5rem; color: var(--muted); font-size: 0.75rem; }
+.lucen-voiceAction { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; min-block-size: 3.5rem; cursor: pointer; font-size: 0.75rem; color: var(--foreground); }
+.lucen-voiceIcon { display: grid; place-items: center; inline-size: 2.75rem; block-size: 2.75rem; background: var(--foreground); color: var(--background); border-radius: 50%; }
+.lucen-voiceAction:active .lucen-voiceIcon { background: var(--olive); }
+.lucen-bottomNav svg { inline-size: 1.4em; block-size: 1.4em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lucen-shell:has(#upcoming:target) .lucen-bottomNav a[href="#upcoming"],
+.lucen-shell:has(#activity:target) .lucen-bottomNav a[href="#activity"],
+.lucen-shell:has(#forecast:target) .lucen-bottomNav a[href="#forecast"],
+.lucen-shell:not(:has(#upcoming:target, #activity:target, #forecast:target)) .lucen-bottomNav a[href="#overview"] { color: var(--foreground); font-weight: 600; }
+@media (hover: hover) and (pointer: fine) {
+  .lucen-primary:hover { background: color-mix(in oklch, var(--olive), black 12%); }
+  .lucen-voiceAction:hover .lucen-voiceIcon { background: var(--olive); }
+  .lucen-brand:hover, .lucen-bottomNav a:hover, .lucen-details summary:hover { background: var(--surface); }
+}
+.lucen-skipLink { position: absolute; z-index: 2; inset-block-start: 0.5rem; inset-inline-start: 0.5rem; padding: 0.75rem; background: var(--background); clip-path: inset(50%); }
+.lucen-skipLink:focus { clip-path: none; }
+.lucen-srOnly { position: absolute; inline-size: 1px; block-size: 1px; overflow: clip; clip-path: inset(50%); white-space: nowrap; }
+.lucen-welcome { padding-inline: 1.5rem; padding-block: calc(1.5rem + env(safe-area-inset-top, 0px)) calc(1.25rem + env(safe-area-inset-bottom, 0px)); overflow-y: auto; }
+.lucen-welcomeBody { display: flex; flex-direction: column; justify-content: safe center; gap: 1.5rem; padding-block: 2rem; }
+.lucen-welcome .lucen-welcomeTitle { font-size: 3rem; font-weight: 500; letter-spacing: -0.06em; }
+.lucen-welcomeTopics { display: flex; flex-wrap: wrap; gap: 0.625rem; padding-block-end: 1rem; }
+.lucen-welcomeTopics span { border: 1px solid var(--foreground); border-radius: 100vmax; padding-block: 0.375rem; padding-inline: 0.875rem; }
+.lucen-intro { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+.lucen-dialog { margin: auto; inline-size: min(22rem, calc(100% - 2rem)); max-block-size: calc(100dvh - 2rem); overflow: auto; border: 1px solid var(--line); border-radius: 1rem; padding: 1.25rem; background: var(--background); color: var(--foreground); }
+.lucen-dialog::backdrop { background: color-mix(in oklch, var(--foreground) 45%, transparent); }
+.lucen-dialogContent { display: grid; gap: 1.25rem; }
+.lucen-dialog blockquote { font-family: Georgia, serif; font-size: 1.5rem; color: var(--olive); }
+.lucen-dialog .lucen-primary { inline-size: 100%; }
