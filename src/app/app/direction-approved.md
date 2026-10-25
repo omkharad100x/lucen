@@ -7,8 +7,7 @@ Sora, white/black neutrals, orange/blue/gray summaries, and floating navigation.
 `home.css` and `home-components.tsx` contain the app-scoped shared design system.
 Device status and gesture bars are omitted; safe-area insets come from the device.
 
-Home, Expenses, and Recurring are implemented. Account retains an explicitly
-labelled foundation preview; the existing voice dialog remains available below
+Home, Expenses, Recurring, and Account are implemented. The existing voice dialog remains available below
 the Home content. Add expense is disabled until its route is implemented.
 `sample-data.ts` is unchanged: lunch remains 23 Oct (Figma says 24 Oct), and the
 Figma-only music transaction of ₹399 has not been added. White text on the
@@ -36,8 +35,18 @@ and color components; the active orange history icon is exported from Figma.
 The existing obligations total ₹14,500 with unchanged amounts and due dates.
 Housing/Utilities labels come from Figma; relative day counts are calculated
 against the fixed 24 October 2026 sample snapshot, which is labelled on screen.
-Account and voice remain previews; Add remains disabled. The approved blue
+Voice remains a preview; Add remains disabled. The approved blue
 summary's previously reported white-text contrast concern is unchanged.
+
+## Account
+
+`/app/account/` follows approved Figma node `35:107`. Its shared navigation tab
+opens the route and uses the verified orange active Account icon. The sample Om
+profile is explicitly labelled, and all financial values come from unchanged
+`sample-data.ts`: balance ₹82,450, income ₹95,000, expenses ₹42,550, upcoming
+obligations ₹14,500, and projected balance ₹59,950. The existing expandable
+forecast calculation remains accessible below the approved screen content.
+No authentication, account connection, Add expense, or recording flow is added.
 
 ## Original foundation context
 

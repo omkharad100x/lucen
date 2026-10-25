@@ -1,15 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import FoundationDialog from "./foundation-dialog";
-import { AccountContent } from "./foundation-content";
 import { money, sample } from "./sample-data";
 
 export type CategoryTone = "blue" | "pink" | "lime";
 
 export function FigmaIcon({ name, active = false }: { name: "bell" | "recurring" | "account"; active?: boolean }) {
   const size = name === "bell" ? 20 : 22;
-  const variant = name === "recurring" && active ? "-active" : "";
+  const variant = name !== "bell" && active ? "-active" : "";
   return <Image className="lh-icon" src={`/lucen/${name}${variant}.svg`} width={size} height={size} alt="" aria-hidden="true" unoptimized />;
 }
 
@@ -44,10 +42,10 @@ export function CategoryBreakdown({ categories, total }: {
   })}</ul>;
 }
 
-export function BottomNavigation({ homeIsCurrentPage = true, active = "home" }: { homeIsCurrentPage?: boolean; active?: "home" | "recurring" }) {
+export function BottomNavigation({ homeIsCurrentPage = true, active = "home" }: { homeIsCurrentPage?: boolean; active?: "home" | "recurring" | "account" }) {
   return <footer className="lh-dock"><nav className="lh-navigation" aria-label="Main navigation">
     <Link className="lh-tab" href="/app/" aria-current={active === "home" ? homeIsCurrentPage ? "page" : "location" : undefined}><span className="lh-home-mark" aria-hidden="true">L</span><span>Home</span></Link>
     <Link className="lh-tab" href="/app/recurring/" aria-current={active === "recurring" ? "page" : undefined}><FigmaIcon name="recurring" active={active === "recurring"} /><span>Recurring</span></Link>
-    <FoundationDialog id="lh-account-preview" title="Balance and cash flow" label="Account — existing sample preview" className="lh-tab" closeLabel={active === "recurring" ? "Back to Recurring" : homeIsCurrentPage ? "Back to Home" : "Back to Expenses"} trigger={<><FigmaIcon name="account" /><span>Account</span></>}><AccountContent /></FoundationDialog>
+    <Link className="lh-tab" href="/app/account/" aria-current={active === "account" ? "page" : undefined}><FigmaIcon name="account" active={active === "account"} /><span>Account</span></Link>
   </nav><button type="button" className="lh-add" disabled aria-label="Add expense — not available yet" title="Add expense comes in a later phase"><span aria-hidden="true">+</span></button></footer>;
 }

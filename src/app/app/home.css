@@ -136,6 +136,19 @@
 .lh-obligation { display: grid; gap: var(--lh-space-8); }
 .lh-obligation-date { font-family: inherit; font-size: .75rem; font-weight: 600; line-height: 1.35; }
 .lh-obligation-card { list-style: none; padding: var(--lh-space-12); border-radius: var(--lh-radius-card); background: var(--lh-white); box-shadow: var(--lh-shadow); }
+.lh-profile { display: flex; align-items: start; gap: var(--lh-space-12); padding: var(--lh-space-16); border-radius: var(--lh-radius-card); background: var(--lh-surface); }
+.lh-profile-avatar { display: grid; place-items: center; flex: none; inline-size: 3rem; block-size: 3rem; border-radius: var(--lh-radius-pill); background: var(--lh-white); font-size: 1.25rem; font-weight: 600; }
+.lh-profile-details { display: grid; gap: .25rem; }
+.lh-profile-name { font-size: 1.25rem; font-weight: 600; }
+.lh-balance-panel h2 { font-size: .75rem; font-weight: 400; color: var(--lh-muted); }
+.lh-account-totals { display: grid; gap: var(--lh-space-16); }
+.lh-account-totals > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--lh-space-12); padding-block: var(--lh-space-8); }
+.lh-account-totals dd { font-variant-numeric: tabular-nums; }
+.lh-account-outlook { display: grid; gap: var(--lh-space-8); padding: var(--lh-space-16); border-radius: var(--lh-radius-card); background: var(--lh-surface); }
+.lh-account-outlook h2 { font-size: .75rem; font-weight: 600; }
+.lh-account-calculation summary { color: var(--lh-ink); }
+.lh-account-calculation .la-calculation { margin: 0; }
+.lh-account-calculation summary:active { background: var(--lh-surface); }
 @media (hover: hover) and (pointer: fine) {
   .lh-bell:hover, .lh-tab:hover, .lh-text-action:hover { background: var(--lh-surface); }
   .lh-summary-trigger:hover { filter: brightness(.98); }
