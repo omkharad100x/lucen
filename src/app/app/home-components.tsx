@@ -5,6 +5,10 @@ import { money, sample } from "./sample-data";
 
 export type CategoryTone = "blue" | "pink" | "lime";
 
+export function LabelMarker() {
+  return <span className="lh-marker" aria-hidden="true" />;
+}
+
 export function FigmaIcon({ name, active = false }: { name: "bell" | "recurring" | "account"; active?: boolean }) {
   const size = name === "bell" ? 20 : 22;
   const variant = name !== "bell" && active ? "-active" : "";
@@ -18,7 +22,7 @@ export function HomeHeader() {
 }
 
 export function SummaryCard({ tone, label, amount }: { tone: "expense" | "recurring" | "total"; label: string; amount: number }) {
-  return <span className="lh-summary" data-tone={tone}><span className="lh-summary-label"><span aria-hidden="true">●</span> {label}</span><span className="lh-summary-amount">{money(amount)}</span></span>;
+  return <span className="lh-summary" data-tone={tone}><span className="lh-summary-label"><LabelMarker />{label}</span><span className="lh-summary-amount">{money(amount)}</span></span>;
 }
 
 export function ExpenseRow({ initial, title, detail, amount, tone, amountLabel = "Expense" }: { initial: string; title: string; detail: string; amount: number; tone: CategoryTone; amountLabel?: string }) {
@@ -36,7 +40,7 @@ export function CategoryBreakdown({ categories, total }: {
   return <ul className="lh-category-list">{categories.map(category => {
     const percentage = total > 0 ? category.amount / total * 100 : 0;
     return <li className="lh-category-total" data-tone={category.tone} key={category.label}>
-      <div className="lh-category-heading"><span className="lh-category-label"><span aria-hidden="true">●</span> {category.label}</span><span className="lh-category-value">{Math.round(percentage)}%&nbsp; {money(category.amount)}</span></div>
+      <div className="lh-category-heading"><span className="lh-category-label"><LabelMarker />{category.label}</span><span className="lh-category-value">{Math.round(percentage)}%&nbsp; {money(category.amount)}</span></div>
       <div className="lh-category-track" aria-hidden="true"><span style={{ "--lh-share": `${percentage}%` } as CSSProperties} /></div>
     </li>;
   })}</ul>;

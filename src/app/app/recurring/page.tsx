@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BottomNavigation, ExpenseRow, HomeHeader, SummaryCard } from "../home-components";
+import { BottomNavigation, ExpenseRow, HomeHeader, LabelMarker, SummaryCard } from "../home-components";
 import { sample, upcoming } from "../sample-data";
 
 export const metadata: Metadata = { title: "Lucen — Recurring payments" };
@@ -30,7 +30,7 @@ export default function RecurringPage() {
           const dueDate = Date.UTC(Number(snapshotYear), months.findIndex(name => name.startsWith(month)), Number(day));
           const daysUntilDue = Math.round((dueDate - snapshotDate) / 86_400_000);
           return <li key={bill.name} className="lh-obligation">
-            <h2 className="lh-obligation-date"><span aria-hidden="true">●</span> <time dateTime={new Date(dueDate).toISOString().slice(0, 10)}>{dateLabel.format(dueDate)}</time></h2>
+            <h2 className="lh-obligation-date"><LabelMarker /><time dateTime={new Date(dueDate).toISOString().slice(0, 10)}>{dateLabel.format(dueDate)}</time></h2>
             <ul className="lh-obligation-card"><ExpenseRow initial={bill.name[0]} title={bill.name} detail={`${categories[bill.name]} · Due in ${daysUntilDue} days`} amount={bill.amount} tone="blue" amountLabel="Upcoming obligation" /></ul>
           </li>;
         })}

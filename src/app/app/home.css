@@ -2,11 +2,13 @@
 .lh-stage {
   --lh-white: oklch(100.00000% 0 none);
   --lh-ink: oklch(13.97912% 0 none);
-  --lh-muted: oklch(56.92624% 0 none);
+  --lh-muted: oklch(52.77958% 0 none); /* #6B6B6B; AA on white and #F1F1F1 */
   --lh-surface: oklch(95.81469% 0 none);
   --lh-line: oklch(92.79706% 0 none);
   --lh-orange: oklch(67.18549% 0.220041 37.43521);
   --lh-orange-soft: oklch(74.42578% 0.147181 42.80938);
+  --lh-orange-text: oklch(46.77450% 0.150601 37.94743); /* #9C3004 */
+  --lh-orange-indicator: oklch(64.22381% 0.214237 36.77195); /* #F24905; non-text 3:1 */
   --lh-blue: oklch(76.45854% 0.117039 237.79056);
   --lh-cyan: oklch(76.90815% 0.131545 224.37021);
   --lh-gray: oklch(71.22384% 0 none);
@@ -36,10 +38,15 @@
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   inline-size: min(100%, 24.375rem);
-  block-size: min(100dvh, 52.75rem);
+  block-size: 100dvh;
+  overflow: clip;
   background: var(--lh-white);
   position: relative;
   isolation: isolate;
+}
+/* Cap the development preview only when there is room around the phone frame. */
+@media (min-width: 48rem) {
+  .lh-shell { block-size: min(100dvh, 52.75rem); }
 }
 .lh-stage :is(button, a) { -webkit-tap-highlight-color: transparent; }
 .lh-stage button { font: inherit; color: inherit; cursor: pointer; border: 0; }
@@ -75,14 +82,17 @@
 .lh-intro { display: grid; gap: .375rem; }
 .lh-intro h1 { font-family: inherit; font-size: 1.875rem; font-weight: 600; line-height: 1.35; letter-spacing: 0; }
 .lh-caption { font-size: .75rem; }
+/* Approved 12px label outline: 9.504px circle, 3.504px gap, optical baseline. */
+.lh-marker { display: inline-block; inline-size: .792em; block-size: .792em; margin-inline-end: .292em; vertical-align: -.034em; border-radius: 50%; background: currentColor; }
 .lh-note { color: var(--lh-muted); font-size: .75rem; line-height: 1.35; }
 .lh-period { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--lh-space-20); padding-block: var(--lh-space-8); }
 .lh-period > span { display: grid; place-items: center; min-block-size: 3rem; border-radius: var(--lh-radius-pill); background: var(--lh-surface); }
 .lh-summaries { display: grid; gap: .625rem; }
 .lh-summary { display: flex; flex-direction: column; align-items: start; gap: var(--lh-space-12); min-block-size: 7rem; padding: var(--lh-space-16); border-radius: var(--lh-radius-card); color: var(--lh-white); text-align: start; }
-.lh-summary[data-tone="expense"] { background: linear-gradient(180deg in srgb, var(--lh-orange), var(--lh-orange-soft)); }
+.lh-summary[data-tone="expense"] { background: linear-gradient(180deg in srgb, var(--lh-orange), var(--lh-orange-soft)); color: var(--lh-ink); }
 .lh-summary[data-tone="recurring"] { background: linear-gradient(180deg in srgb, var(--lh-blue), var(--lh-cyan) 50%, var(--lh-blue)); }
 .lh-summary[data-tone="total"] { background: linear-gradient(180deg in srgb, var(--lh-gray), var(--lh-gray-soft)); }
+.lh-summary:is([data-tone="recurring"], [data-tone="total"]) { color: var(--lh-ink); }
 .lh-summary-label { font-size: .75rem; }
 .lh-summary-amount { font-size: 2rem; line-height: 1.35; font-weight: 400; font-variant-numeric: tabular-nums; }
 .lh-summary-trigger { display: block; padding: 0; inline-size: 100%; background: transparent; border-radius: var(--lh-radius-card); text-decoration: none; }
@@ -104,7 +114,8 @@
 .lh-navigation { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); flex: 1; min-block-size: 3.75rem; padding: .25rem; border-radius: var(--lh-radius-pill); background: var(--lh-white); box-shadow: var(--lh-shadow); }
 .lh-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .125rem; min-block-size: 3.25rem; padding-block: 0; padding-inline: 0; background: transparent; text-decoration: none; border-radius: var(--lh-radius-pill); }
 .lh-stage .lh-tab { font-size: .625rem; color: var(--lh-ink); }
-.lh-stage .lh-tab[aria-current] { background: var(--lh-surface); color: var(--lh-orange); }
+.lh-stage .lh-tab[aria-current] { background: var(--lh-surface); color: var(--lh-orange-indicator); }
+.lh-stage .lh-tab[aria-current] > span:last-child { color: var(--lh-orange-text); }
 .lh-home-mark { font-size: 1.4375rem; font-weight: 700; }
 .lh-add { display: grid; place-items: center; inline-size: 3.375rem; block-size: 3.375rem; flex: none; background: var(--lh-white); color: var(--lh-ink); text-decoration: none; box-shadow: var(--lh-shadow); border-radius: var(--lh-radius-pill); }
 .lh-add span { font-size: 2rem; line-height: 1.35; }
@@ -128,7 +139,8 @@
 .lh-category-total[data-tone="pink"] { --lh-category-color: var(--lh-pink-ink); }
 .lh-category-total[data-tone="lime"] { --lh-category-color: var(--lh-lime-ink); }
 .lh-category-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem var(--lh-space-8); font-size: .75rem; }
-.lh-category-label { color: var(--lh-category-color); }
+.lh-category-label { color: var(--lh-ink); }
+.lh-category-label > .lh-marker { color: var(--lh-category-color); }
 .lh-category-value { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .lh-category-track { block-size: .375rem; border-radius: var(--lh-radius-pill); background: var(--lh-line); }
 .lh-category-track > span { display: block; inline-size: var(--lh-share); block-size: 100%; border-radius: inherit; background: var(--lh-category-color); }

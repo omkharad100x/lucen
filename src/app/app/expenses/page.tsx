@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BottomNavigation, CategoryBreakdown, HomeHeader, SampleExpenseList } from "../home-components";
+import { BottomNavigation, CategoryBreakdown, HomeHeader, LabelMarker, SampleExpenseList } from "../home-components";
 import { sample } from "../sample-data";
 import { figmaCategoryTotals } from "./figma-category-totals";
 
@@ -13,11 +13,11 @@ export default function ExpensesPage() {
       <h1 className="lh-page-title">Recent expenses</h1>
       <p className="lh-note">October 2026 · Sample data</p>
       <section className="lh-recent" aria-labelledby="lh-expenses-heading">
-        <div className="lh-section-heading"><h2 id="lh-expenses-heading"><span aria-hidden="true">●</span> Recent expenses</h2></div>
+        <div className="lh-section-heading"><h2 id="lh-expenses-heading"><LabelMarker />Recent expenses</h2></div>
         <SampleExpenseList />
       </section>
       <section className="lh-recent lh-category-panel" aria-labelledby="lh-category-heading" aria-describedby="lh-category-source">
-        <div className="lh-section-heading"><h2 id="lh-category-heading"><span aria-hidden="true">●</span> By category</h2></div>
+        <div className="lh-section-heading"><h2 id="lh-category-heading"><LabelMarker />By category</h2></div>
         <CategoryBreakdown categories={figmaCategoryTotals} total={sample.expenses} />
       </section>
       <p id="lh-category-source" className="lh-note">Illustrative monthly category totals from the approved design. These are separate from the two listed sample entries.</p>

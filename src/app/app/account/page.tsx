@@ -6,6 +6,9 @@ import { money, projected, sample, upcoming } from "../sample-data";
 export const metadata: Metadata = { title: "Lucen — Your account" };
 
 export default function AccountPage() {
+  const [day, month, year] = sample.asOf.split(" ");
+  const captionDate = `${day} ${month.slice(0, 3)} ${year}`;
+
   return <>
     <a className="la-skip" href="#lh-account-main">Skip to account</a>
     <HomeHeader />
@@ -19,7 +22,7 @@ export default function AccountPage() {
       <section className="lh-recent lh-balance-panel" aria-labelledby="lh-balance-heading">
         <h2 id="lh-balance-heading">Available balance</h2>
         <p className="lh-summary-amount">{money(sample.balance)}</p>
-        <p className="lh-note">As of {sample.asOf} · Illustrative data</p>
+        <p className="lh-note">As of {captionDate} · Illustrative data</p>
       </section>
       <dl className="lh-account-totals">
         <div><dt>Monthly income</dt><dd>{money(sample.income)}</dd></div>
