@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Lucen — Recent expenses" };
 export default function ExpensesPage() {
   return <>
     <a className="la-skip" href="#lh-expenses-main">Skip to expenses</a>
-    <HomeHeader previewCloseLabel="Back to Expenses" />
+    <HomeHeader />
     <main id="lh-expenses-main" className="lh-content" tabIndex={-1}>
       <h1 className="lh-page-title">Recent expenses</h1>
       <p className="lh-note">October 2026 · Sample data</p>

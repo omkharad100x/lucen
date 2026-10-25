@@ -85,7 +85,7 @@
 .lh-summary[data-tone="total"] { background: linear-gradient(180deg in srgb, var(--lh-gray), var(--lh-gray-soft)); }
 .lh-summary-label { font-size: .75rem; }
 .lh-summary-amount { font-size: 2rem; line-height: 1.35; font-weight: 400; font-variant-numeric: tabular-nums; }
-.lh-summary-trigger { padding: 0; inline-size: 100%; background: transparent; border-radius: var(--lh-radius-card); }
+.lh-summary-trigger { display: block; padding: 0; inline-size: 100%; background: transparent; border-radius: var(--lh-radius-card); text-decoration: none; }
 .lh-recent { padding: var(--lh-space-16); border-radius: var(--lh-radius-card); box-shadow: var(--lh-shadow); background: var(--lh-white); display: grid; gap: .25rem; }
 .lh-section-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--lh-space-8); }
 .lh-section-heading h2 { font-family: inherit; font-size: .75rem; line-height: 1.35; font-weight: 600; }
@@ -132,6 +132,10 @@
 .lh-category-value { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .lh-category-track { block-size: .375rem; border-radius: var(--lh-radius-pill); background: var(--lh-line); }
 .lh-category-track > span { display: block; inline-size: var(--lh-share); block-size: 100%; border-radius: inherit; background: var(--lh-category-color); }
+.lh-obligations { display: grid; gap: var(--lh-space-16); list-style: none; padding: 0; }
+.lh-obligation { display: grid; gap: var(--lh-space-8); }
+.lh-obligation-date { font-family: inherit; font-size: .75rem; font-weight: 600; line-height: 1.35; }
+.lh-obligation-card { list-style: none; padding: var(--lh-space-12); border-radius: var(--lh-radius-card); background: var(--lh-white); box-shadow: var(--lh-shadow); }
 @media (hover: hover) and (pointer: fine) {
   .lh-bell:hover, .lh-tab:hover, .lh-text-action:hover { background: var(--lh-surface); }
   .lh-summary-trigger:hover { filter: brightness(.98); }

@@ -7,8 +7,8 @@ Sora, white/black neutrals, orange/blue/gray summaries, and floating navigation.
 `home.css` and `home-components.tsx` contain the app-scoped shared design system.
 Device status and gesture bars are omitted; safe-area insets come from the device.
 
-Home and Expenses are implemented. Recurring and Account retain explicitly
-labelled foundation previews; the existing voice dialog remains available below
+Home, Expenses, and Recurring are implemented. Account retains an explicitly
+labelled foundation preview; the existing voice dialog remains available below
 the Home content. Add expense is disabled until its route is implemented.
 `sample-data.ts` is unchanged: lunch remains 23 Oct (Figma says 24 Oct), and the
 Figma-only music transaction of ₹399 has not been added. White text on the
@@ -27,6 +27,17 @@ The missing Figma music record is not invented. The category totals (₹25,530,
 ₹10,638, ₹6,382) are explicitly sourced from Figma and labelled as illustrative
 monthly aggregates, separate from those two records. They total the existing
 ₹42,550 monthly expenses; bar proportions are calculated from those amounts.
+
+## Recurring
+
+`/app/recurring/` follows approved Figma node `35:106`. The header bell, Home
+summary, and Recurring tab open this route. It reuses the summary, row, spacing,
+and color components; the active orange history icon is exported from Figma.
+The existing obligations total ₹14,500 with unchanged amounts and due dates.
+Housing/Utilities labels come from Figma; relative day counts are calculated
+against the fixed 24 October 2026 sample snapshot, which is labelled on screen.
+Account and voice remain previews; Add remains disabled. The approved blue
+summary's previously reported white-text contrast concern is unchanged.
 
 ## Original foundation context
 
