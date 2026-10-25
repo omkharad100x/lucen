@@ -47,5 +47,5 @@ export function BottomNavigation({ homeIsCurrentPage = true, active = "home" }: 
     <Link className="lh-tab" href="/app/" aria-current={active === "home" ? homeIsCurrentPage ? "page" : "location" : undefined}><span className="lh-home-mark" aria-hidden="true">L</span><span>Home</span></Link>
     <Link className="lh-tab" href="/app/recurring/" aria-current={active === "recurring" ? "page" : undefined}><FigmaIcon name="recurring" active={active === "recurring"} /><span>Recurring</span></Link>
     <Link className="lh-tab" href="/app/account/" aria-current={active === "account" ? "page" : undefined}><FigmaIcon name="account" active={active === "account"} /><span>Account</span></Link>
-  </nav><button type="button" className="lh-add" disabled aria-label="Add expense — not available yet" title="Add expense comes in a later phase"><span aria-hidden="true">+</span></button></footer>;
+  </nav><Link href="/app/add/" className="lh-add" aria-label="Add expense"><span aria-hidden="true">+</span></Link></footer>;
 }

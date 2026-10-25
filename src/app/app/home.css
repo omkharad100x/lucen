@@ -106,17 +106,17 @@
 .lh-stage .lh-tab { font-size: .625rem; color: var(--lh-ink); }
 .lh-stage .lh-tab[aria-current] { background: var(--lh-surface); color: var(--lh-orange); }
 .lh-home-mark { font-size: 1.4375rem; font-weight: 700; }
-.lh-add { display: grid; place-items: center; inline-size: 3.375rem; block-size: 3.375rem; flex: none; background: var(--lh-white); box-shadow: var(--lh-shadow); border-radius: var(--lh-radius-pill); }
+.lh-add { display: grid; place-items: center; inline-size: 3.375rem; block-size: 3.375rem; flex: none; background: var(--lh-white); color: var(--lh-ink); text-decoration: none; box-shadow: var(--lh-shadow); border-radius: var(--lh-radius-pill); }
 .lh-add span { font-size: 2rem; line-height: 1.35; }
 .lh-foundation { display: grid; gap: var(--lh-space-12); }
 .lh-foundation .la-primary { background: var(--lh-ink); color: var(--lh-white); inline-size: 100%; }
-.lh-button { display: block; inline-size: 100%; min-block-size: 3rem; padding-block: .75rem; padding-inline: 1rem; border-radius: var(--lh-radius-pill); }
+.lh-button { display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; inline-size: 100%; min-block-size: 3rem; padding-block: .75rem; padding-inline: 1rem; border-radius: var(--lh-radius-pill); }
 .lh-stage .lh-button { background: var(--lh-ink); color: var(--lh-white); }
 .lh-preview { background: var(--lh-white); color: var(--lh-ink); border-color: var(--lh-line); }
 .lh-preview h2 { font-family: inherit; font-size: 1.5rem; font-weight: 600; }
 .lh-preview h3 { font-size: 1rem; font-weight: 600; margin: 0; }
 .lh-shell:has(dialog[open]) .lh-content { overflow-y: hidden; }
-.lh-bell:active, .lh-tab:active, .lh-text-action:active { background: var(--lh-surface); }
+.lh-bell:active, .lh-tab:active, .lh-text-action:active, .lh-add:active { background: var(--lh-surface); }
 .lh-summary-trigger:active { filter: brightness(.96); }
 .lh-button:active, .lh-foundation .la-primary:active { background: color-mix(in oklch, var(--lh-ink), white 15%); }
 .lh-sr-only { position: absolute; inline-size: 1px; block-size: 1px; overflow: clip; clip-path: inset(50%); white-space: nowrap; }
@@ -150,7 +150,7 @@
 .lh-account-calculation .la-calculation { margin: 0; }
 .lh-account-calculation summary:active { background: var(--lh-surface); }
 @media (hover: hover) and (pointer: fine) {
-  .lh-bell:hover, .lh-tab:hover, .lh-text-action:hover { background: var(--lh-surface); }
+  .lh-bell:hover, .lh-tab:hover, .lh-text-action:hover, .lh-add:hover { background: var(--lh-surface); }
   .lh-summary-trigger:hover { filter: brightness(.98); }
   .lh-button:hover, .lh-foundation .la-primary:hover { background: color-mix(in oklch, var(--lh-ink), white 10%); }
 }

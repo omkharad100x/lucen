@@ -19,7 +19,7 @@ export default function MobileHome() {
         <Link href="/app/expenses/" className="lh-text-action">See all</Link>
       </div><SampleExpenseList /></section>
       <p className="lh-note">Sample data. Total = expenses + upcoming recurring payments.</p>
-      <section className="lh-foundation" aria-label="Existing foundation previews"><p className="lh-note">Voice entry remains a sample preview. Add expense is not available yet.</p><VoiceEntry /></section>
+      <section className="lh-foundation" aria-label="Existing foundation previews"><p className="lh-note">Voice entry and Add expense are front-end previews. No transactions are saved.</p><VoiceEntry /></section>
     </main>
     <BottomNavigation />
   </>;
