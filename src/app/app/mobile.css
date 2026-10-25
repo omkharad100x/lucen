@@ -1,0 +1,117 @@
+/* Every rule is app-scoped. No body, :root, landing, or dashboard overrides. */
+.la-stage {
+  --la-ivory: oklch(97% 0.009 85);
+  --la-oatmeal: oklch(93% 0.016 85);
+  --la-ink: oklch(28% 0.012 110);
+  --la-muted: oklch(47% 0.018 110);
+  --la-olive: oklch(44% 0.045 120);
+  --la-warning: oklch(43% 0.065 65);
+  --la-line: color-mix(in oklch, var(--la-ink) 13%, var(--la-ivory));
+  --la-heading: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem);
+  --la-balance: clamp(2.5rem, 2.25rem + 1vw, 2.875rem);
+  --la-gutter: 1.25rem;
+  display: grid;
+  place-items: center;
+  min-block-size: 100dvh;
+  inline-size: 100%;
+  background: var(--la-oatmeal);
+  color: var(--la-ink);
+  color-scheme: light;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  text-align: start;
+}
+.la-stage *, .la-stage *::before, .la-stage *::after { box-sizing: border-box; min-inline-size: 0; }
+.la-stage :is(h1, h2, p, ul, dl, dd, blockquote) { margin: 0; }
+.la-stage :is(h1, h2) { text-wrap: balance; }
+.la-stage p { text-wrap: pretty; }
+.la-stage :is(a, button, summary) { touch-action: manipulation; }
+.la-stage :focus-visible { outline: 2px solid var(--la-olive); outline-offset: 3px; }
+.la-stage svg { display: block; inline-size: 1.4em; block-size: 1.4em; flex: none; }
+.la-shell {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  inline-size: min(100%, 24.375rem);
+  block-size: min(100dvh, 52.75rem);
+  background: var(--la-ivory);
+  box-shadow: 0 0 0 1px var(--la-line);
+  isolation: isolate;
+}
+.la-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-inline: max(var(--la-gutter), env(safe-area-inset-left, 0px)) max(var(--la-gutter), env(safe-area-inset-right, 0px));
+  padding-block: calc(1rem + env(safe-area-inset-top, 0px)) 1rem;
+}
+.la-brand { font-family: Georgia, "Times New Roman", serif; font-size: 1.75rem; line-height: 1.1; letter-spacing: -0.055em; }
+.la-sample { flex: none; border: 1px solid var(--la-line); padding-block: 0.25rem; padding-inline: 0.625rem; border-radius: 100vmax; font-size: 0.75rem; color: var(--la-muted); }
+.la-note { color: var(--la-muted); font-size: 0.75rem; line-height: 1.5; }
+.la-content {
+  min-block-size: 0;
+  overflow-y: auto;
+  overscroll-behavior-block: contain;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-inline: max(var(--la-gutter), env(safe-area-inset-left, 0px)) max(var(--la-gutter), env(safe-area-inset-right, 0px));
+  padding-block: 0.5rem 1.25rem;
+  scroll-padding-block: 0.75rem;
+}
+.la-content > * { flex: none; }
+.la-content:focus-visible { outline-offset: -3px; }
+.la-content section { scroll-margin-block: 0.5rem; }
+.la-section { display: grid; gap: 0.625rem; }
+.la-section h2, .la-dialog h2 { font-family: Georgia, "Times New Roman", serif; font-size: var(--la-heading); font-weight: 400; line-height: 1.25; letter-spacing: -0.025em; }
+.la-sectionHeading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 0.625rem; }
+.la-eyebrow { font-family: var(--font-geist-sans), sans-serif; font-size: 0.75rem; font-weight: 500; line-height: 1.5; letter-spacing: 0.075em; text-transform: uppercase; color: var(--la-muted); }
+.la-balancePanel { display: grid; gap: 0.25rem; }
+.la-balance { font-size: var(--la-balance); font-weight: 400; line-height: 1.2; letter-spacing: -0.055em; font-variant-numeric: tabular-nums; padding-block: 0.25rem; }
+.la-totals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; padding-block-start: 0.75rem; }
+.la-totals dt { font-size: 0.75rem; color: var(--la-muted); }
+.la-totals dd { font-size: 1.125rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.la-income { color: var(--la-olive); }
+.la-bills, .la-transactions { list-style: none; padding: 0; }
+.la-bills li, .la-transactions li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.75rem; align-items: center; padding-block: 0.5rem; }
+.la-bills li + li, .la-transactions li + li { border-block-start: 1px solid var(--la-line); }
+.la-amount { font-variant-numeric: tabular-nums; text-align: end; white-space: nowrap; font-weight: 500; }
+.la-due, .la-warning { color: var(--la-warning); font-size: 0.75rem; }
+.la-forecast { background: var(--la-oatmeal); padding: 1rem; border-radius: 1rem; gap: 0.25rem; }
+.la-projected { font-size: 1.875rem; font-variant-numeric: tabular-nums; line-height: 1.3; letter-spacing: -0.045em; }
+.la-details summary { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-block-size: 2.75rem; color: var(--la-olive); font-size: 0.8125rem; cursor: pointer; list-style: none; }
+.la-details summary::-webkit-details-marker { display: none; }
+.la-details summary > span { font-size: 1.25rem; }
+.la-details[open] summary > span { rotate: 45deg; }
+.la-calculation { display: grid; gap: 0.625rem; padding-block: 0.25rem 0.75rem; font-size: 0.8125rem; }
+.la-calculation > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.75rem; }
+.la-calculation dd { font-variant-numeric: tabular-nums; text-align: end; }
+.la-calculation > div:last-child { border-block-start: 1px solid var(--la-line); padding-block-start: 0.625rem; font-weight: 500; }
+.la-dock { display: grid; gap: 0.5rem; padding-inline: max(var(--la-gutter), env(safe-area-inset-left, 0px)) max(var(--la-gutter), env(safe-area-inset-right, 0px)); padding-block: 0.75rem calc(0.75rem + env(safe-area-inset-bottom, 0px)); border-block-start: 1px solid var(--la-line); background: var(--la-ivory); }
+.la-primary { display: flex; align-items: center; justify-content: center; gap: 0.625rem; inline-size: 100%; min-block-size: 3rem; padding-block: 0.75rem; padding-inline: 1rem; border: 0; border-radius: 100vmax; background: var(--la-olive); color: var(--la-ivory); font: inherit; font-size: 0.9375rem; font-weight: 500; line-height: 1.5; cursor: pointer; }
+.la-primary:focus-visible { outline-color: var(--la-olive); }
+.la-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.25rem; }
+.la-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; min-block-size: 3rem; padding-block: 0.25rem; border-radius: 0.625rem; color: var(--la-muted); text-decoration: none; font-size: 0.75rem; }
+.la-nav svg { inline-size: 1.5em; block-size: 1.5em; }
+.la-shell:has(#la-bills:target) .la-nav a[href="#la-bills"],
+.la-shell:has(#la-outlook:target) .la-nav a[href="#la-outlook"],
+.la-shell:has(#la-activity:target) .la-nav a[href="#la-activity"],
+.la-shell:not(:has(#la-bills:target, #la-outlook:target, #la-activity:target)) .la-nav a[href="#la-overview"] { background: var(--la-oatmeal); color: var(--la-olive); font-weight: 500; }
+.la-primary:active { background: color-mix(in oklch, var(--la-olive), black 15%); }
+.la-nav a:active, .la-details summary:active { background: var(--la-oatmeal); color: var(--la-ink); }
+.la-dialog { margin: auto; inline-size: min(22rem, calc(100% - 2rem)); max-block-size: calc(100dvh - 2rem); overflow-y: auto; border: 1px solid var(--la-line); border-radius: 1.25rem; padding: 1.5rem; background: var(--la-ivory); color: var(--la-ink); font: inherit; }
+.la-dialog::backdrop { background: color-mix(in oklch, var(--la-ink) 40%, transparent); }
+.la-dialogContent { display: grid; gap: 1rem; }
+.la-dialog h2 { font-size: 1.625rem; }
+.la-dialog blockquote { font-family: Georgia, "Times New Roman", serif; font-size: 1.5rem; line-height: 1.4; color: var(--la-olive); }
+.la-shell:has(.la-dialog[open]) .la-content { overflow-y: hidden; }
+.la-skip { position: absolute; inset-block-start: 0.5rem; inset-inline-start: 0.5rem; z-index: 2; padding: 0.75rem; background: var(--la-ivory); color: var(--la-ink); clip-path: inset(50%); }
+.la-skip:focus { clip-path: none; }
+.la-skip:active { background: var(--la-oatmeal); }
+@media (hover: hover) and (pointer: fine) {
+  .la-primary:hover { background: color-mix(in oklch, var(--la-olive), black 10%); }
+  .la-nav a:hover, .la-details summary:hover { color: var(--la-olive); background: var(--la-oatmeal); }
+}
