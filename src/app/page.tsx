@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 import type { CSSProperties } from "react";
+import LandingMotion from "./landing-motion";
 import "./landing.css";
 
 const sora = Sora({ subsets: ["latin"], display: "swap", variable: "--font-landing" });
@@ -68,6 +69,7 @@ const faqs = [
 export default function Home() {
   return (
     <div className={`ln-site ${sora.variable}`}>
+      <LandingMotion />
       <a className="ln-skipLink" href="#main">Skip to content</a>
       <header className="ln-header ln-grid">
         <div className="ln-headerInner">
@@ -81,13 +83,13 @@ export default function Home() {
           <div className="ln-heroInner">
             <div className="ln-heroCopy">
               <p className="ln-eyebrow"><span className="ln-blueDot" /> A FRESH TAKE ON PERSONAL FINANCE</p>
-              <h1 id="hero-heading">Your money,<br /><span>understood.</span></h1>
+              <h1 id="hero-heading"><span className="ln-word" style={{ "--ln-word-delay": "0ms" } as CSSProperties}>Your</span> <span className="ln-word" style={{ "--ln-word-delay": "70ms" } as CSSProperties}>money,</span><br /><span className="ln-word ln-wordMuted" style={{ "--ln-word-delay": "140ms" } as CSSProperties}>understood.</span></h1>
               <p className="ln-lead">Less figuring it out.<br />More getting on with life.</p>
               <p className="ln-bodyCopy">Meet Lucen. A personal finance app for Android, being built to bring your spending, bills, and what’s next into one clear picture.</p>
-              <div className="ln-heroActions"><a href="#download" className="ln-button">Get Lucen for Android <Icon name="download" /></a><a href="#features" className="ln-textLink">Meet the app <Icon name="arrow" /></a></div>
+              <div className="ln-heroActions"><a href="#download" className="ln-button" data-ln-pointer="magnet"><span className="ln-magneticContent">Get Lucen for Android <Icon name="download" /></span></a><a href="#features" className="ln-textLink">Meet the app <Icon name="arrow" /></a></div>
               <p className="ln-releaseNote"><span className="ln-statusDot" /> In development · Direct APK coming soon</p>
             </div>
-            <div className="ln-heroVisual">
+            <div className="ln-heroVisual" data-ln-pointer="hero">
               <span className="ln-visualLabel">A LITTLE LESS NOISE.<br />A LOT MORE CLARITY.</span>
               <AppPreview />
               <div className="ln-voiceFloat" aria-hidden="true"><span className="ln-voiceFloatIcon"><Icon name="mic" /></span><div><small>JUST SAY IT.</small><p>“Spent ₹240 on lunch.”</p></div><span className="ln-floatCheck"><Icon name="check" /></span></div>
@@ -98,12 +100,12 @@ export default function Home() {
         <section className="ln-features ln-grid" id="features" aria-labelledby="features-heading">
           <div className="ln-sectionHeading"><p className="ln-eyebrow">THE LITTLE THINGS, UNDERSTOOD.</p><h2 id="features-heading">A clearer picture.<br /><span>A lighter routine.</span></h2><p>From your morning coffee to your monthly EMI.<br />A place for the money moments that add up.</p></div>
           <div className="ln-featureGrid">
-            <article className="ln-feature ln-featureVoice">
+            <article className="ln-feature ln-featureVoice" data-ln-pointer="card">
               <div className="ln-featureTop"><span className="ln-index">01 / LESS TYPING</span><span className="ln-roundIcon"><Icon name="mic" /></span></div>
               <div className="ln-voiceDemo"><span className="ln-demoLabel">VOICE ENTRY CONCEPT</span><p>“Spent ₹240<br />on lunch.”</p><VoiceWave /><div className="ln-entryReceipt"><span>Lunch <small>Food & drinks</small></span><strong>₹240</strong></div></div>
               <div className="ln-featureCopy"><h3>Life happens.<br />Just say it.</h3><p>Voice entry is at the heart of Lucen. An easier way to capture the little expenses before they slip your mind.</p></div>
             </article>
-            <article className="ln-feature ln-featureBills">
+            <article className="ln-feature ln-featureBills" data-ln-pointer="card">
               <div className="ln-featureTop"><span className="ln-index">02 / FEWER SURPRISES</span><span className="ln-roundIcon"><Icon name="wallet" /></span></div>
               <div className="ln-billsDemo"><div className="ln-demoHeading"><span>This week</span><span>OCTOBER</span></div><div className="ln-week" aria-hidden="true">{[["M", "26"], ["T", "27"], ["W", "28"], ["T", "29"], ["F", "30"]].map(([day, date]) => <span className={date === "28" ? "ln-selectedDay" : undefined} key={date}><small>{day}</small><strong>{date}</strong></span>)}</div><div className="ln-billRow"><span className="ln-billIcon"><Icon name="home" /></span><div>Home loan EMI<small>Due 28 October</small></div><strong>₹12,000</strong></div><div className="ln-billRow"><span className="ln-billIcon ln-billIconBlue"><Icon name="wallet" /></span><div>Electricity bill<small>Due 29 October</small></div><strong>₹1,800</strong></div><p className="ln-billsNotice">Illustrative bills · Payments not scheduled</p></div>
               <div className="ln-featureCopy"><h3>Know what’s due.<br />Before it is.</h3><p>Your upcoming EMIs and bills, together. See the commitments ahead and leave room for the rest of life.</p></div>
@@ -111,7 +113,7 @@ export default function Home() {
           </div>
           <article className="ln-forecastFeature">
             <div className="ln-featureCopy"><span className="ln-index">03 / A LITTLE FORESIGHT</span><h3>Today’s balance.<br />Tomorrow’s perspective.</h3><p>A cash-flow preview connects what you have with what’s coming up. So the month ahead feels a little easier to understand.</p></div>
-            <div className="ln-forecastDemo"><div className="ln-demoHeading"><span>Your month ahead</span><span>ILLUSTRATIVE</span></div><dl><div><dt>Available now</dt><dd>₹82,450</dd></div><div><dt>Upcoming bills</dt><dd>−₹14,500</dd></div><div><dt>Planned spending</dt><dd>−₹8,000</dd></div><div><dt>Projected balance <small>31 October</small></dt><dd>₹59,950</dd></div></dl><p>An estimate, not a guarantee.</p></div>
+            <div className="ln-forecastDemo" data-ln-pointer="card"><div className="ln-demoHeading"><span>Your month ahead</span><span>ILLUSTRATIVE</span></div><dl><div><dt>Available now</dt><dd>₹82,450</dd></div><div><dt>Upcoming bills</dt><dd>−₹14,500</dd></div><div><dt>Planned spending</dt><dd>−₹8,000</dd></div><div><dt>Projected balance <small>31 October</small></dt><dd>₹59,950</dd></div></dl><p>An estimate, not a guarantee.</p></div>
           </article>
         </section>
         <section className="ln-how ln-grid" id="how-it-works" aria-labelledby="how-heading"><div className="ln-howInner"><div><p className="ln-eyebrow">A SMALLER MONEY ROUTINE.</p><h2 id="how-heading">A moment a day.<br /><span>A clearer month.</span></h2><p className="ln-bodyCopy">The everyday experience we’re building.</p></div><ol className="ln-steps"><li><span>01</span><div><h3>Capture the moment.</h3><p>Speak an expense or add it yourself. Keep the details while they’re still fresh.</p></div></li><li><span>02</span><div><h3>See the whole picture.</h3><p>Bring income, spending, and upcoming bills into one simple overview.</p></div></li><li><span>03</span><div><h3>Look a little ahead.</h3><p>Use the cash-flow preview to understand what could be left at month-end.</p></div></li></ol></div></section>

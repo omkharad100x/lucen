@@ -44,6 +44,7 @@
 .ln-nav a { display: inline-flex; align-items: center; min-block-size: 2.75rem; font-size: 0.8125rem; color: var(--ln-muted); }
 .ln-button { display: inline-flex; align-items: center; justify-content: center; gap: 1em; min-block-size: 3.5rem; padding-block: 1rem; padding-inline: 1.5rem; border: 1px solid transparent; border-radius: 100vmax; background: var(--ln-ink); color: var(--ln-white); font: inherit; font-size: 0.875rem; font-weight: 500; line-height: 1.5; text-align: center; cursor: pointer; }
 .ln-button svg { inline-size: 1.25em; block-size: 1.25em; }
+.ln-magneticContent { display: inline-flex; align-items: center; justify-content: center; gap: 1em; }
 .ln-button:focus-visible { outline-color: var(--ln-ink); }
 .ln-buttonSmall { min-block-size: 2.75rem; padding-block: 0.75rem; padding-inline: 1.25rem; font-size: 0.75rem; }
 .ln-button:disabled { cursor: not-allowed; }
@@ -212,4 +213,109 @@
 }
 @media (prefers-reduced-motion: no-preference) {
   .ln-site :is(a, button, summary) { transition: background-color 160ms ease-out, color 160ms ease-out, opacity 160ms ease-out; }
+
+  .ln-word,
+  .ln-hero .ln-lead,
+  .ln-hero .ln-bodyCopy,
+  .ln-hero .ln-heroActions,
+  .ln-hero .ln-releaseNote {
+    animation: ln-rise-in 620ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+  .ln-word { display: inline-block; animation-delay: var(--ln-word-delay, 0ms); }
+  .ln-wordMuted { color: var(--ln-muted); }
+  .ln-hero .ln-lead { animation-delay: 240ms; }
+  .ln-hero .ln-bodyCopy { animation-delay: 320ms; }
+  .ln-hero .ln-heroActions { animation-delay: 400ms; }
+  .ln-hero .ln-releaseNote { animation-delay: 480ms; }
+  .ln-heroVisual { animation: ln-visual-in 700ms cubic-bezier(.22, 1, .36, 1) both; }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  /* Separate layers keep pointer depth independent of the hero entrance. */
+  .ln-heroVisual .ln-productPreview {
+    transform: perspective(1100px)
+      translate3d(calc(var(--ln-pointer-x, 0) * 6px), calc(var(--ln-pointer-y, 0) * 6px), 0)
+      rotateX(calc(var(--ln-pointer-y, 0) * -3deg))
+      rotateY(calc(var(--ln-pointer-x, 0) * 3deg));
+  }
+  .ln-heroVisual::before {
+    translate: calc(var(--ln-pointer-x, 0) * -4px) calc(var(--ln-pointer-y, 0) * -4px);
+  }
+  .ln-heroVisual .ln-voiceFloat {
+    translate: calc(var(--ln-pointer-x, 0) * 12px) calc(var(--ln-pointer-y, 0) * 10px);
+  }
+  .ln-heroVisual .ln-balanceCard {
+    translate: calc(var(--ln-pointer-x, 0) * 2px) calc(var(--ln-pointer-y, 0) * 2px);
+  }
+  .ln-heroVisual .ln-visualLabel {
+    translate: calc(var(--ln-pointer-x, 0) * -3px) calc(var(--ln-pointer-y, 0) * -3px);
+  }
+  /* Only the contents move: the anchor's hit area and focus ring stay fixed. */
+  .ln-magneticContent {
+    translate: calc(var(--ln-pointer-x, 0) * 6px) calc(var(--ln-pointer-y, 0) * 4px);
+    transition: scale 120ms ease-out;
+  }
+  .ln-button[data-ln-pointer="magnet"]:active .ln-magneticContent { scale: .98; }
+  .ln-button[data-ln-pointer="magnet"]:focus-visible .ln-magneticContent { translate: none; }
+  .ln-site [data-ln-pointer="card"] {
+    position: relative;
+    isolation: isolate;
+    transform: perspective(1200px)
+      translateY(calc(var(--ln-pointer-presence, 0) * -2px))
+      rotateX(calc(var(--ln-pointer-y, 0) * -1.5deg))
+      rotateY(calc(var(--ln-pointer-x, 0) * 1.5deg));
+  }
+  .ln-site [data-ln-pointer="card"]::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 1rem 2.5rem color-mix(in oklch, var(--ln-ink) 10%, transparent);
+    opacity: var(--ln-pointer-presence, 0);
+  }
+  /* A restrained edge reflection follows the same smoothed pointer signal. */
+  .ln-site [data-ln-pointer="card"]::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset calc(var(--ln-pointer-x, 0) * -1px) calc(var(--ln-pointer-y, 0) * -1px) 0 color-mix(in oklch, var(--ln-white) 25%, transparent);
+    opacity: var(--ln-pointer-presence, 0);
+  }
+}
+
+@keyframes ln-rise-in {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ln-visual-in {
+  from { opacity: 0; transform: translateY(1rem) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* One entrance per section visit; content is readable even without JS.
+     Child translate leaves pointer-driven card transforms independent. */
+  .ln-site [data-ln-entered="true"] > :not(.ln-steps):not(.ln-questions),
+  .ln-site [data-ln-entered="true"] > .ln-steps > li,
+  .ln-site [data-ln-entered="true"] > .ln-questions > details {
+    animation: ln-story-enter 600ms cubic-bezier(.22, 1, .36, 1) backwards;
+  }
+  .ln-site [data-ln-entered="true"] > :nth-child(2),
+  .ln-site [data-ln-entered="true"] > .ln-steps > :nth-child(2),
+  .ln-site [data-ln-entered="true"] > .ln-questions > :nth-child(2) { animation-delay: 80ms; }
+  .ln-site [data-ln-entered="true"] > :nth-child(n+3),
+  .ln-site [data-ln-entered="true"] > .ln-steps > :nth-child(n+3),
+  .ln-site [data-ln-entered="true"] > .ln-questions > :nth-child(n+3) { animation-delay: 160ms; }
+}
+
+@keyframes ln-story-enter {
+  from { translate: 0 12px; }
+  to { translate: 0 0; }
 }
